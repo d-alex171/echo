@@ -65,36 +65,48 @@ const Song = ({
   
 
   return (
-    <div className={`song ${expanded ? "expanded" : ""}`}>
-      <img
-        src={album_cover}
-        alt={album_name}
-        className={styles["album-cover"]}
-        onClick={toggleExpand}
-      />
-    
-      <div className={styles["song-info"]}>
-        <strong>
-          {artists.map((artist) => artist.name).join(", ")} – {song_name}
-        </strong>
-        <p>Album: {album_name}</p>
-
-        {expanded && (
-          <div className={styles["expanded-info"]}>
-            <p><strong>Artists:</strong> {artists.map((a) => a.name).join(", ")}</p>
-            <p><strong>Song:</strong> {song_name}</p>
-            <p><strong>Album:</strong> {album_name}</p>
-            
-            {genres.length > 0 && (
-                <>
-                <p><strong>Genres:</strong> {genres.join(", ")}</p>
-                <EventRecommendation genres={genres}></EventRecommendation>
-                </>
-            )}
-          </div>
-        )}
+    <>
+      <div className={styles.song}>
+        <img
+          src={album_cover}
+          alt={album_name}
+          className={styles["album-cover"]}
+          onClick={toggleExpand}
+        />
+        <div className={styles["song-info"]}>
+          <strong>
+            {artists.map((artist) => artist.name).join(", ")} – {song_name}
+          </strong>
+          <p>Album: {album_name}</p>
+        </div>
       </div>
-    </div>
+
+      {expanded && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <button className={styles.closeButton} onClick={toggleExpand}>
+              &times;
+            </button>
+            <div className={styles["expanded-info"]}>
+              <img
+                src={album_cover}
+                alt={album_name}
+                className={styles["modal-album"]}
+              />
+              <h2>{song_name}</h2>
+              <p><strong>Artists:</strong> {artists.map((a) => a.name).join(", ")}</p>
+              <p><strong>Album:</strong> {album_name}</p>
+              {genres.length > 0 && (
+                <>
+                  <p><strong>Genres:</strong> {genres.join(", ")}</p>
+                  <EventRecommendation genres={genres} />
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
