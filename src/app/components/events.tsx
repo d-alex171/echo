@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import styles from "./events.module.css"
 
 const EventRecommendation = ({ genres }: { genres: string[] }) => {
   const [events, setEvents] = useState<any[]>([]);
@@ -31,17 +32,28 @@ const EventRecommendation = ({ genres }: { genres: string[] }) => {
   }, [genres]);
 
   return (
-    <div className="event-container">
+    <div className={styles.eventContainer}>
       <h2>Recommended Events</h2>
-      <div className="events">
+      <div className={styles.events}>
         {events.length > 0 ? (
           events.map((event) => (
-            <div key={event.id} className="event-card">
-              <img src={event.images[0]?.url} alt={event.name} />
-              <h3>{event.name}</h3>
-              <p>{event.dates?.start?.localDate}</p>
-              <p>{event._embedded?.venues[0]?.name}</p>
-              <a href={event.url} target="_blank" rel="noopener noreferrer">
+            <div key={event.id} className={styles.eventCard}>
+              <img
+                src={event.images[0]?.url}
+                alt={event.name}
+                className={styles.eventImage}
+              />
+              <h3 className={styles.eventName}>{event.name}</h3>
+              <p className={styles.eventDate}>{event.dates?.start?.localDate}</p>
+              <p className={styles.eventVenue}>
+                {event._embedded?.venues[0]?.name}
+              </p>
+              <a
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.eventLink}
+              >
                 View Event
               </a>
             </div>

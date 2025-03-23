@@ -4,27 +4,27 @@
     flex-direction: column;
     align-items: center;
     padding: 40px;
-  }
-  
-  .album-cover {
+}
+
+.album-cover {
     width: 150px;
     height: 150px;
     cursor: pointer;
     border-radius: 8px;
     transition: transform 0.2s ease-in-out;
-  }
-  
-  .album-cover:hover {
+}
+
+.album-cover:hover {
     transform: scale(1.05);
-  }
-  
-  .song-info {
+}
+
+.song-info {
     text-align: center;
     margin-top: 10px;
-  }
-  
-  /* Fullscreen Modal Overlay */
-  .modalOverlay {
+}
+
+/* Fullscreen Modal Overlay */
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -38,33 +38,44 @@
     pointer-events: auto;
     /* Add transition for smooth modal fade-in/out */
     transition: opacity 0.3s ease;
-  }
-  
-  /* Ensure modal does not interfere when not shown */
-  .modalOverlay.hidden {
+}
+
+/* Ensure modal does not interfere when not shown */
+.modalOverlay.hidden {
     display: none;
     opacity: 0;
-  }
-  
-  /* Modal Content */
-  .modalContent {
+}
+
+/* Modal Content */
+.modalContent {
     background: white;
     padding: 2rem;
     border-radius: 1rem;
     max-width: 800px;
     width: 100%;
     position: relative;
-  }
-  
-  .modal-album {
+    max-height: 90vh; /* Ensure modal doesn't exceed the viewport height */
+    overflow-y: auto; /* Make the content inside the modal scrollable */
+}
+
+/* Modal Header */
+.modalHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-album {
     width: 200px;
     height: 200px;
     object-fit: cover;
     border-radius: 1rem;
     margin-bottom: 1rem;
-  }
-  
-  .closeButton {
+}
+
+/* Close Button */
+.closeButton {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -72,9 +83,20 @@
     background: none;
     border: none;
     cursor: pointer;
-  }
-  
-  .expanded-info {
+}
+
+/* Expanded Info */
+.expanded-info {
     text-align: center;
-  }
-  
+    margin-top: 20px;
+}
+
+/* Ensure content doesn't overflow the modal's boundaries */
+.modalContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
