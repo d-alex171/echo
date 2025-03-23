@@ -31,7 +31,8 @@ const SpotifyAuth = () => {
   };
 
   const generateCodeVerifier = (length: number) => {
-    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     return Array.from(crypto.getRandomValues(new Uint8Array(length)))
       .map((x) => possible.charAt(x % possible.length))
       .join("");
@@ -47,8 +48,20 @@ const SpotifyAuth = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleLogin}>
+    <div style={{ margin: "50px" }}>
+      <button
+        style={{
+          backgroundColor: "green",
+          borderRadius: "20px",
+          color: "white",
+          outline: "0",
+          width: "100%",
+          padding: "10px",
+          border: "0",
+          cursor: "pointer",
+        }}
+        onClick={handleLogin}
+      >
         Log in with Spotify
       </button>
     </div>
