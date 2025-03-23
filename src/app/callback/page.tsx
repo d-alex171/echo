@@ -49,7 +49,7 @@ const CallbackPage = () => {
         const profileResponse = await fetch("https://api.spotify.com/v1/me", {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
-
+        localStorage.setItem("spotify_access_token", accessToken);
         const profile = await profileResponse.json();
 
         // Use the login function to store the user's profile and token

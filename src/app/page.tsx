@@ -5,6 +5,9 @@ import type { AppProps } from "next/app";
 import { AuthProvider, useAuth } from "./context/AuthContext"; // Assuming your context is set up
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Header from "./components/header";
+import TracksPage from "./components/tracksShelf"
+import styles from './home.module.css'
 
 
 export default function App({ Component, pageProps }: AppProps){
@@ -23,13 +26,12 @@ export default function App({ Component, pageProps }: AppProps){
   }
 
   return (
-    <div>
-      <h1>Welcome, {profile?.display_name}!</h1>
-      {profile?.images[0] && (
-        <img src={profile.images[0].url} alt="Profile" width={200} height={200} />
-      )}
-      <p>Email: {profile?.email}</p>
-      <a href={profile?.external_urls.spotify}>Spotify Profile</a>
+    <div className={styles['main']}>
+      <Header img_url={profile.images[0].url} name={profile?.display_name}/>
+      <div className={styles['songShelf']}>
+        <TracksPage></TracksPage>
+      </div>
+      
     </div>
   );
 }
