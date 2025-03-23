@@ -10,17 +10,59 @@ const Song = ({
   songId
 }: {
   song_name: string;
-  artists: { name: string }[];
+  artists: { name: string , id: string}[];
   album_cover: string;
   album_name: string;
   songId: any;
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [genres, setGenres] = useState<any[]>([]);
+  const accessToken = localStorage.getItem("spotify_access_token"); 
   
+  const fullGenreList: any[] = [];
   const toggleExpand = () => {
     setExpanded((prev) => !prev);
   };
+
+
+  useEffect(() => {
+    const fetchGenreId = async () => {
+      try {
+        const artistIdList = artists.map((a) => a.id).join(",");
+        const response = await fetch(
+          "https://api.spotify.com/v1/artists?ids=" + artistIdList,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+  
+        if (!response.ok) {
+          throw new Error("Failed to fetch artists");
+        }
+  
+        const data = await response.json();
+  
+        // Collect genres into a single list
+        const allGenres = data.artists.flatMap((artist: any) => artist.genres);
+  
+        // Optional: remove duplicates
+        const uniqueGenres = [...new Set(allGenres)];
+  
+        // Set in state
+        setGenres(uniqueGenres);
+      } catch (error) {
+        setError("Failed to fetch artist genres");
+        console.error(error);
+      }
+    };
+  
+    fetchGenreId();
+  }, [artists, accessToken]);
+  
 
   return (
     <div className={`song ${expanded ? "expanded" : ""}`}>
@@ -42,6 +84,13 @@ const Song = ({
             <p><strong>Artists:</strong> {artists.map((a) => a.name).join(", ")}</p>
             <p><strong>Song:</strong> {song_name}</p>
             <p><strong>Album:</strong> {album_name}</p>
+            
+            {genres.length > 0 && (
+                <>
+                <p><strong>Genres:</strong> {genres.join(", ")}</p>
+                <EventRecommendation genres={genres}></EventRecommendation>
+                </>
+            )}
           </div>
         )}
       </div>
