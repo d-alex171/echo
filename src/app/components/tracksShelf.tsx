@@ -48,24 +48,26 @@ const TracksPage = () => {
 
   return (
     <div>
-      <h1>Your Spotify Tracks</h1>
-      <ul>
-        {tracks.map((trackItem) => {
-          const track = trackItem.track;
-          return (
-            <li key={track.id} style={{ marginBottom: "20px" }}>
-              <div className={styles['shelf']}>
-                <Song song_name={track.name} 
-                album_cover={track.album.images[0]?.url} 
-                album_name={track.album.name}
-                artists={track.artists}
-                songId={track.id}/>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+    <h1>Your Spotify Tracks</h1>
+    <div className={styles.trackGrid}>
+      {tracks.map((trackItem) => {
+        const track = trackItem.track;
+        return (
+          <div key={track.id} className={styles.shelf}>
+            <Song
+              song_name={track.name}
+              album_cover={track.album.images[0]?.url}
+              album_name={track.album.name}
+              artists={track.artists}
+              songId={track.id}
+            />
+          </div>
+        );
+      })}
     </div>
+  </div>
+  
+
   );
 };
 

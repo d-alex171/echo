@@ -27,7 +27,9 @@ export default function App({ Component, pageProps }: AppProps){
 
   return (
     <div className={styles['main']}>
-      <Header img_url={profile.images[0].url} name={profile?.display_name}/>
+      <div className={styles['header']}>
+        <Header img_url={profile.images[0].url} name={profile?.display_name}/>
+      </div>
       <div className={styles['songShelf']}>
         <TracksPage></TracksPage>
       </div>

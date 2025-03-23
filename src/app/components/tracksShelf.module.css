@@ -1,4 +1,32 @@
-.shelf {
-    flex-direction: row;
+.trackGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px;
+    padding: 30px;
+    justify-items: center;
+  }
+  
+  .shelf {
+    display: flex;
     justify-content: center;
-}
+  }
+  
+
+  @media (max-width: 1200px) {
+    .trackGrid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .trackGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .trackGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  

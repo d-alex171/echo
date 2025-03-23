@@ -1,39 +1,38 @@
 .song {
-    border: 1px solid #ccc;
+    width: 180px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 12px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    background-color: #fff;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
-    max-width: 400px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
   }
   
-  .song.expanded {
-    background-color: #f7f7f7;
+  .song:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #1db954;
   }
   
   .album-cover {
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 4px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
-  
-  .song.expanded .album-cover {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 8px;
   }
   
   .song-info {
-    margin-top: 8px;
+    font-size: 14px;
   }
   
   .expanded-info {
-    margin-top: 12px;
-    padding-top: 8px;
-    border-top: 1px solid #eee;
+    font-size: 12px;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .song:hover .song-info {
+    color: #1db954;
+    transition: color 0.25s ease;
   }
   
