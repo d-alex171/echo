@@ -1,16 +1,17 @@
-import React, { JSX, JSXElementConstructor } from "react";
+import React from "react";
 import Image from "next/image";
+import styles from "./header.module.css"; // Import the CSS module
 
-const Header = (props:{img_url: any, name: any}) => {
-    return(
-        <div className='mainHeader'>
-            {/* <Image src='' alt='logo'></Image> */}
-            {/* <Image src={props.img_url} alt="profile_pic" width={100} height={100}></Image>
-            <h1>{props.name}</h1> */}
-        </div>
-
-    );
-
-}
+const Header = (props: { img_url: string; name: string }) => {
+  return (
+    <div className={styles.mainHeader}>
+      <Image className={styles.logo} src="/logo.png" width={600} height={300} alt="Echo logo" />
+      <div className={styles.headerContent}>
+        <h1 className={styles.headerText}>{props.name}</h1>
+        <img className={styles.profilePic} src={props.img_url} alt="profile_pic" />
+      </div>
+    </div>
+  );
+};
 
 export default Header;
